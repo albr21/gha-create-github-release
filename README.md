@@ -1,10 +1,20 @@
-# <project-name>
+# gha-create-github-release
 
-<!-- A brief description of the project. -->
+GitHub Action to create a GitHub release (tag + release notes)
 
 ## Usage
 
-<!-- Provide instructions on how to use the project, including code examples if applicable. -->
+```yaml
+steps:
+  - name: Create GitHub Release
+    uses: albr21/gha-create-github-release@1.0.0
+    with:
+      sha: ${{ github.sha }}
+      tag: my-tag
+      title: my-title
+      body: |-
+        my-body
+```
 
 ## Contributing
 

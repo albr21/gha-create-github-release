@@ -1,7 +1,9 @@
-name: <project-name>
+name: gha-create-github-release
 description: |-
-  <project-description>
-version: 0.0.0
+  GitHub Action to create a GitHub release (tag + release notes)
+version: 1.0.0
 changes: |-
+  [1.0.0]
+    * Initial release
   [0.0.0]
     * Under development
