@@ -1,0 +1,43 @@
+name: gha-create-github-release
+
+description: |-
+  GitHub Action to create a GitHub release (tag + release notes)
+
+author: albr21
+branding:
+  icon: archive
+  color: green
+
+inputs:
+  sha: 
+    description: Commit SHA
+    required: true
+  tag:
+    description: Tag name
+    required: true
+  title:
+    description: Title of the GitHub release note
+    required: true
+  body:
+    description: Body of the GitHub release note
+    required: true
+  command-line-interpreter:
+    description: |-
+      Command line interpreter.
+      By default, it uses `bash`, but you can change it to `sh`, `powershell`, or any other supported shell if needed.
+    required: false
+    default: bash
+
+runs:
+  using: composite
+  steps:
+    - name: Set GITHUB_ACTION_PATH variable
+      run: echo "GITHUB_ACTION_PATH=${GITHUB_ACTION_PATH}" >> $GITHUB_ENV
+      shell: ${{ inputs.command-line-interpreter }}
+    
+    - name: Create GitHub Release
+      uses: albr21/gha-github-script-wrapper@1.0.0
+      with:
+        script: ${{ env.GITHUB_ACTION_PATH }}/js/create-github-release.js
+        input: '{"sha": "${{inputs.sha}}", "tag": "${{inputs.tag}}", "name": "${{inputs.title}}", "body": "${{inputs.body}}"}'
+        command-line-interpreter: ${{ inputs.command-line-interpreter }}
