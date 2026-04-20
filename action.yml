@@ -39,5 +39,5 @@ runs:
       uses: albr21/gha-github-script-wrapper@1.0.0
       with:
         script: ${{ env.GITHUB_ACTION_PATH }}/js/create-github-release.js
-        input: '{"sha": "${{inputs.sha}}", "tag": "${{inputs.tag}}", "name": "${{inputs.title}}", "body": "${{inputs.body}}"}'
+        inputs: '{"sha": "${{ inputs.sha }}", "tag": "${{ inputs.tag }}", "name": "${{ inputs.title }}", "body": "${{ inputs.body }}"}'
         command-line-interpreter: ${{ inputs.command-line-interpreter }}
