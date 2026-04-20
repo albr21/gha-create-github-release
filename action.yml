@@ -35,9 +35,12 @@ runs:
       run: echo "GITHUB_ACTION_PATH=${GITHUB_ACTION_PATH}" >> $GITHUB_ENV
       shell: ${{ inputs.command-line-interpreter }}
 
-    - name: Encode body input to avoid issues with multiline strings
+    - name: Encode Body Input (Avoid Multiline Issues)
       id: encode-body
-      run: echo "ENCODED_BODY=$(echo '${{ inputs.body }}' | base64)" >> $GITHUB_OUTPUT
+      run: |-
+        BODY="${{ inputs.body }}"
+        ENCODED_BODY=$(printf "%s" "$BODY" | base64 | tr -d '\n')
+        echo "ENCODED_BODY=$ENCODED_BODY" >> $GITHUB_OUTPUT
       shell: ${{ inputs.command-line-interpreter }}
     
     - name: Create GitHub Release
