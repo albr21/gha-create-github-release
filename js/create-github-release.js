@@ -1,7 +1,7 @@
 module.exports = async ({github, context, core, glob, io, exec, getOctokit}) => {
   core.info(`Publishing release note for ${data['tag']} on ${context.repo.owner}/${context.repo.repo}`)
 
-  const data = JSON.parse(core.getInput('input', {required: false}))
+  const data = JSON.parse(core.getInput('inputs', {required: false}))
 
   let body;
   body = data['body'];
