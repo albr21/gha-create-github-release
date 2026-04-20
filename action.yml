@@ -34,10 +34,15 @@ runs:
     - name: Set GITHUB_ACTION_PATH variable
       run: echo "GITHUB_ACTION_PATH=${GITHUB_ACTION_PATH}" >> $GITHUB_ENV
       shell: ${{ inputs.command-line-interpreter }}
+
+    - name: Encode body input to avoid issues with multiline strings
+      id: encode-body
+      run: echo "ENCODED_BODY=$(echo '${{ inputs.body }}' | base64)" >> $GITHUB_OUTPUT
+      shell: ${{ inputs.command-line-interpreter }}
     
     - name: Create GitHub Release
       uses: albr21/gha-github-script-wrapper@1.0.0
       with:
         script: ${{ env.GITHUB_ACTION_PATH }}/js/create-github-release.js
-        inputs: '{"sha": "${{ inputs.sha }}", "tag": "${{ inputs.tag }}", "name": "${{ inputs.title }}", "body": "${{ inputs.body }}"}'
+        inputs: '{"sha": "${{ inputs.sha }}", "tag": "${{ inputs.tag }}", "name": "${{ inputs.title }}", "body": "${{ steps.encode-body.outputs.ENCODED_BODY }}"}'
         command-line-interpreter: ${{ inputs.command-line-interpreter }}
