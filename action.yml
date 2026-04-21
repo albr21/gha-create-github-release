@@ -21,6 +21,11 @@ inputs:
   body:
     description: Body of the GitHub release note
     required: true
+  force:
+    description: |-
+      Whether to force the tag creation if it already exists
+    required: false
+    default: "false"
   command-line-interpreter:
     description: |-
       Command line interpreter.
