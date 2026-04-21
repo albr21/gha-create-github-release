@@ -2,8 +2,10 @@ name: gha-create-github-release
 description: |-
   GitHub Action to create a GitHub release (tag + release notes)
 version: 1.0.0
-changes: |-
-  [1.0.0]
-    * Initial release
-  [0.0.0]
-    * Under development
+releases:
+  - version: 1.0.0
+    changes:
+      - Initial release
+  - version: 0.0.0
+    changes:
+      - Under development
