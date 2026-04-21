@@ -25,9 +25,6 @@ module.exports = async ({github, context, core, glob, io, exec, getOctokit}) => 
       });
       core.info(`Deleted existing tag '${tag}' to move it to '${sha}'`);
     } catch (err) {
-      if (err.status !== 404) {
-        throw err;
-      }
       core.info(`Tag '${tag}' does not exist, will be created`);
     }
 
